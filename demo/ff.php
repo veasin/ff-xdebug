@@ -1,12 +1,12 @@
 <?php
-include __DIR__ . '/vendor/autoload.php';
+include __DIR__ . '/../vendor/autoload.php';
 
-use function nx\{container, xdebug, route, hump, middleware, output, from, filter, input, cache, db, env, args, name, log, safe, hook};
+use function ff\{container, xdebug, route, hump, middleware, output, from, filter, input, cache, db, env, args, name, log, safe, hook};
 
 xdebug();
 
 // 容器操作
-container('app.name', 'nx-tiny');
+container('app.name', 'ff');
 container('db.default', ['dsn' => 'mysql:host=localhost;dbname=test', 'username' => 'root']);
 $name = container('app.name');
 

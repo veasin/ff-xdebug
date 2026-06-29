@@ -1,17 +1,17 @@
-# nx-tiny-xdebug
+# ff-xdebug
 
-[nx-tiny](https://github.com/veasin/nx-tiny) 框架的 Xdebug 追踪查看器。提供单一函数即可启动/停止 Xdebug 追踪，并以格式化表格展示函数调用时间线，支持耗时统计、过滤筛选和源码定位。
+[ff](https://github.com/veasin/ff) 框架的 Xdebug 追踪查看器。提供单一函数即可启动/停止 Xdebug 追踪，并以格式化表格展示函数调用时间线，支持耗时统计、过滤筛选和源码定位。
 
 ## 安装
 
 ```bash
-composer require veasin/nx-tiny-xdebug
+composer require veasin/ff-xdebug
 ```
 
 ## 用法
 
 ```php
-use function nx\xdebug;
+use function ff\xdebug;
 
 // 开始追踪
 xdebug();
@@ -33,12 +33,12 @@ xdebug([]); // 空数组 = 不过滤，显示所有调用
 终端中生成格式化表格：
 
 ```
-  NX Xdebug Trace
+  Xdebug Trace
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    +ms           call                     caller
   ─────────────────────────────────────────
-   0.000         container('app.name')     /demo/nx-tiny.php:9
-   0.042         container('db.default')   /demo/nx-tiny.php:10
+   0.000         container('app.name')     /demo/ff.php:9
+   0.042         container('db.default')   /demo/ff.php:10
    ...
   ─────────────────────────────────────────
   Total: 32 calls, 15.234 ms
@@ -52,17 +52,17 @@ xdebug([]); // 空数组 = 不过滤，显示所有调用
 xdebug(['container', 'route', '\\']);
 ```
 
-| 过滤规则 | 说明 |
-|---------|------|
-| `'funcName'` | 仅显示指定函数名的调用 |
-| `'\\'` | 仅显示非用户定义的内部 PHP 函数 |
-| `'{}'` | 仅显示闭包调用 |
-| `'!prefix'` | 排除以指定前缀开头的函数 |
-| `'nx+'` | 显示 nx 框架内部调用（默认隐藏） |
+| 过滤规则         | 说明                 |
+|--------------|--------------------|
+| `'funcName'` | 仅显示指定函数名的调用        |
+| `'\\'`       | 仅显示非用户定义的内部 PHP 函数 |
+| `'{}'`       | 仅显示闭包调用            |
+| `'!prefix'`  | 排除以指定前缀开头的函数       |
+| `'ff+'`      | 显示 ff 框架内部调用（默认隐藏） |
 
 ## API
 
-### `nx\xdebug(null|bool|array $enable = null): mixed`
+### `ff\xdebug(null|bool|array $enable = null): mixed`
 
 | 参数 | 行为 |
 |------|------|
@@ -79,7 +79,7 @@ xdebug(['container', 'route', '\\']);
 [
   'level'      => int,    // 调用栈深度
   'func_name'  => string, // 完整函数名
-  'display_name' => string, // 简短名称（去除 nx\ 前缀）
+  'display_name' => string, // 简短名称（去除 ff\ 前缀）
   'file'       => string, // 源文件路径
   'line'       => string, // 源码行号
   'args'       => string, // 参数字符串
@@ -93,7 +93,7 @@ xdebug(['container', 'route', '\\']);
 
 - PHP ^8.5
 - 需启用 [Xdebug](https://xdebug.org/) 扩展
-- [nx-tiny](https://github.com/veasin/nx-tiny) ^0.0.20
+- [ff](https://github.com/veasin/ff) >=0.2.0
 
 ## 许可证
 

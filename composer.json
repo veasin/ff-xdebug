@@ -1,6 +1,6 @@
 {
-  "name":"veasin/nx-tiny-xdebug",
-  "description":"Xdebug trace viewer for nx-tiny framework - function call tracing with timing, filtering and formatted output",
+  "name":"veasin/ff-xdebug",
+  "description":"Xdebug trace viewer for ff framework - function call tracing with timing, filtering and formatted output",
   "type":"library",
   "license":"LGPL-3.0-or-later",
   "authors":[
@@ -11,11 +11,11 @@
   ],
   "require":{
     "php":"^8.5",
-	"veasin/nx-tiny":"^0.0.20"
+	"veasin/ff":">=0.2.0"
   },
   "autoload":{
     "psr-4":{
-      "nx\\":"src/"
+      "ff\\":"src/"
     },
     "files":[
       "src/xdebug.php"

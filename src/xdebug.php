@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace nx;
+namespace ff;
 function xdebug(null|bool|array $enable = null): mixed{
 	static $traceFile = null;
 	static $stopped = false;
@@ -19,11 +19,11 @@ function xdebug(null|bool|array $enable = null): mixed{
 	}
 	if($cached !== null) return $enable === false ? $cached : null;
 	$filterNames = is_array($enable) ? $enable : [];
-	$showNxDetails = false;
+	$showDetails = false;
 	if($filterNames){
 		$cleaned = [];
 		foreach($filterNames as $name){
-			if($name === 'nx+') $showNxDetails = true;
+			if($name === 'ff+') $showDetails = true;
 			else $cleaned[] = $name;
 		}
 		$filterNames = $cleaned;
@@ -50,7 +50,7 @@ function xdebug(null|bool|array $enable = null): mixed{
 			$funcName = $fields[5] ?? '';
 			$isUser = (int)($fields[6] ?? 0);
 			if(str_starts_with($funcName, 'xdebug_')) continue;
-			if($funcName === 'nx\\debug') continue;
+			if($funcName === 'ff\\debug') continue;
 			if($firstTime === null) $firstTime = $time;
 			$funcNum = (int)$fields[1];
 			$level = (int)$fields[0];
@@ -83,7 +83,7 @@ function xdebug(null|bool|array $enable = null): mixed{
 			$entries[$funcNum] = [
 				'level' => $level,
 				'func_name' => $funcName,
-				'display_name' => str_starts_with($funcName, 'nx\\') ? substr($funcName, 3) : $funcName,
+				'display_name' => str_starts_with($funcName, 'ff\\') ? substr($funcName, 3) : $funcName,
 				'file' => $file,
 				'line' => $lineNum,
 				'args' => $args,
@@ -168,10 +168,10 @@ function xdebug(null|bool|array $enable = null): mixed{
 		}
 	}
 	if($removeClo) $cached = $cascade($cached, $removeClo);
-	if(!$showNxDetails){
+	if(!$showDetails){
 		$foldParents = [];
 		foreach($cached as $i => $c){
-			if(str_starts_with($c['func_name'], 'nx\\')) $foldParents[$i] = $c['level'];
+			if(str_starts_with($c['func_name'], 'ff\\')) $foldParents[$i] = $c['level'];
 		}
 		if($foldParents){
 			$removeFold = [];
@@ -217,7 +217,7 @@ function xdebug(null|bool|array $enable = null): mixed{
 	$wMerged = $maxElapsed + $wMsBracket;
 	$wCaller = max($maxCaller, 6);
 	$totalW = 2 + $wMerged + 1 + $wCall + 1 + $wCaller;
-	echo "\n  NX Xdebug Trace\n";
+	echo "\n  Xdebug Trace\n";
 	echo str_repeat('━', $totalW) . "\n";
 	$hdrPad = $wMsBracket > 0 ? 1 : 0;
 	echo sprintf("  %*s%-*s %-*s %-*s\n", $maxElapsed + $hdrPad, '+ms', $wMsBracket - $hdrPad, '', $wCall, 'call', $wCaller, 'caller');
